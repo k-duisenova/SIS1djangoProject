@@ -1,42 +1,45 @@
+{#uses the same style and structure as base.html#}
 {% extends 'base.html' %}
 
 {% block content %}
 
     <script type="text/javascript">
-function checkOnlyOne(b){
-    var x = document.getElementsByClassName('type');
-    var i;
+        {#this function checks that only one option from checkboxes are chosen#}
+        function checkOnlyOne(b){
+            {#checkbox variable called x#}
+            var x = document.getElementsByClassName('type');
+            var i;
+            {#for loop for checking that this checkbox's value is false or true#}
+            for (i = 0; i < x.length; i++) {
+                if(x[i].value != b)
+                    x[i].checked = false;
+                }
+            }
+        {#checking that at least one checkbox is chosen#}
+        function Check() {
+            var x = document.getElementsByClassName('type');
+            if (x[0].checked == false && x[1].checked == false) {
+                alert("You must check at least one checkbox.");
+                return false;
+            } else {
+                return true;
+            }
+        }
 
-    for (i = 0; i < x.length; i++) {
-        if(x[i].value != b)
-            x[i].checked = false;
-    }
-}
-
-function Check() {
-    var x = document.getElementsByClassName('type');
-    if (x[0].checked == false && x[1].checked == false) {
-        alert("You must check at least one checkbox.");
-        return false;
-    } else {
-        return true;
-    }
-}
-
-
-</script>
+    </script>
 
 
     <h1>Welcome to Ethereum Calculator!</h1>
 
-<form action="calculate" style="justify-items: center;">
+    {#form to fill to the user#}
+    <form action="calculate" style="justify-items: center;">
 
-    Enter amount of Ethereums : <input type="text" name="eths" required><br>
-    Ethereum  <input class="type" onclick="checkOnlyOne(this.value)" type="checkbox" name="eth" value="ethe">
-    Ethereum classic  <input class="type" onclick="checkOnlyOne(this.value)" type="checkbox" name="eth" value="ethec"><br>
-    <input type="submit" id="checkBtn" onclick="return Check()">
+        Enter amount of Ethereums : <input type="text" name="eths" required><br>
+        Ethereum  <input class="type" onclick="checkOnlyOne(this.value)" type="checkbox" name="eth" value="ethe">
+        Ethereum classic  <input class="type" onclick="checkOnlyOne(this.value)" type="checkbox" name="eth" value="ethec"><br>
+        <input type="submit" id="checkBtn" onclick="return Check()">
 
-</form>
+    </form>
 
 
 {% endblock%}
