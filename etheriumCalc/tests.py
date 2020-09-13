@@ -4,6 +4,7 @@ import unittest
 from django.test import Client
 
 
+# giving inputs and testing its success
 class CalcTestCase(unittest.TestCase):
     def setUp(self):
         self.client = Client()
@@ -20,4 +21,4 @@ class CalcTestCase(unittest.TestCase):
         response = self.client.get('')
         # inputs: amount = 10 and type is Ethereum Classic
         r2 = self.client.get('/calculate?eths=10&eth=ethec')
-        self.assertEqual(response.status_code, r2.status_code)
+        self.assertEqual(r2.status_code, 200)
